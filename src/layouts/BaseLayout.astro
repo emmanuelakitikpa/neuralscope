@@ -1,0 +1,134 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import { pageUrl, pageAbs } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  pageKey?: string;
+}
+
+const { lang, title, description, pageKey } = Astro.props;
+const t = ui[lang];
+const other: Lang = lang === 'en' ? 'fr' : 'en';
+const fullTitle = title ? `${title} | ${t.siteName}` : `${t.siteName} | ${t.tagline}`;
+const desc = description ?? t.metaDescription;
+const canonical = pageAbs(lang, pageKey);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const navKeys = ['tools', 'reviews', 'comparisons', 'tutorials'] as const;
+const legalKeys = ['privacy', 'terms', 'editorial', 'about', 'contact'] as const;
+const legalLabels = ui[lang].pagesText;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={pageAbs('en', pageKey)} />
+    <link rel="alternate" hreflang="fr" href={pageAbs('fr', pageKey)} />
+    <link rel="alternate" hreflang="x-default" href={pageAbs('en', pageKey)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t.siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'fr_FR'} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href={pageUrl(lang)}>Neural<span>Scope</span></a>
+        <nav class="nav" aria-label="Main">
+          {navKeys.map((k) => <a href={pageUrl(lang, k)}>{t.nav[k]}</a>)}
+        </nav>
+        <div class="lang-switch">
+          <span aria-current="true">{lang.toUpperCase()}</span>
+          <span class="sep">/</span>
+          <a href={pageUrl(other, pageKey)} hreflang={other} lang={other}>{other.toUpperCase()}</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="logo" href={pageUrl(lang)}>Neural<span>Scope</span></a>
+          <p class="muted">{t.footer.about}</p>
+        </div>
+        <div>
+          <h3>{t.footer.explore}</h3>
+          <ul>
+            {navKeys.map((k) => <li><a href={pageUrl(lang, k)}>{t.nav[k]}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h3>{t.footer.legal}</h3>
+          <ul>
+            {legalKeys.map((k) => <li><a href={pageUrl(lang, k)}>{legalLabels[k].title}</a></li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="container copyright">© {year} {t.siteName}. {t.footer.rights}</div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --navy: #101b33;
+    --blue: #3988f5;
+    --white: #ffffff;
+    --gray: #f3f5f9;
+    --text: #1d2740;
+    --muted: #5d6b86;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { width: min(1120px, 92%); margin-inline: auto; }
+  .muted { color: var(--muted); }
+
+  .site-header { background: var(--navy); color: var(--white); position: sticky; top: 0; z-index: 10; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 0; flex-wrap: wrap; }
+  .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; }
+  .logo span { color: var(--blue); }
+  .nav { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .nav a { opacity: 0.85; }
+  .nav a:hover { opacity: 1; color: var(--blue); }
+  .lang-switch { font-size: 0.9rem; display: flex; gap: 0.4rem; }
+  .lang-switch [aria-current] { font-weight: 700; color: var(--blue); }
+  .lang-switch a:hover { color: var(--blue); }
+  .lang-switch .sep { opacity: 0.4; }
+
+  .site-footer { background: var(--navy); color: var(--white); margin-top: 4rem; padding-top: 3rem; }
+  .site-footer .muted { color: #a9b6d1; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
+  .site-footer h3 { margin: 0 0 0.8rem; font-size: 1rem; }
+  .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+  .site-footer li a { color: #a9b6d1; }
+  .site-footer li a:hover { color: var(--blue); }
+  .copyright { border-top: 1px solid #243357; margin-top: 2rem; padding: 1.2rem 0; color: #a9b6d1; font-size: 0.9rem; }
+
+  @media (max-width: 720px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .nav { gap: 1rem; font-size: 0.95rem; }
+  }
+</style>

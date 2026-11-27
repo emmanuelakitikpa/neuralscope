@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ui, type Lang } from '../i18n/ui';
+import { pageUrl } from '../i18n/utils';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<BaseLayout lang={lang}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">{t.tagline}</p>
+      <h1>{t.hero.title}</h1>
+      <p class="hero-text">{t.hero.text}</p>
+      <form class="search" role="search" onsubmit="return false;">
+        <input type="search" placeholder={t.hero.search} aria-label={t.hero.search} />
+        <button type="submit">{t.hero.button}</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2>{t.categoriesTitle}</h2>
+    <div class="grid cats">
+      {t.categories.map((c) => (
+        <a class="card" href={pageUrl(lang, 'tools')}>
+          <h3>{c.name}</h3>
+          <p>{c.text}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2>{t.popularTitle}</h2>
+    <div class="grid tools">
+      {t.popular.map((p) => (
+        <div class="card">
+          <span class="tag">{p.tag}</span>
+          <h3>{p.name}</h3>
+          <p>{p.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2>{t.latestTitle}</h2>
+    <div class="grid posts">
+      {t.latest.map((title) => (
+        <article class="card">
+          <span class="tag soon">{t.soon}</span>
+          <h3>{title}</h3>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { background: linear-gradient(180deg, var(--navy), #18284a); color: var(--white); padding: 5rem 0 4.5rem; text-align: center; }
+  .eyebrow { color: var(--blue); font-weight: 600; margin: 0 0 1rem; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.15; margin: 0 0 1rem; }
+  .hero-text { max-width: 640px; margin: 0 auto 2rem; color: #c6d2ea; font-size: 1.1rem; }
+  .search { display: flex; gap: 0.6rem; max-width: 620px; margin: 0 auto; }
+  .search input { flex: 1; padding: 0.9rem 1.1rem; border-radius: 10px; border: 0; font-size: 1rem; }
+  .search button { padding: 0.9rem 1.4rem; border-radius: 10px; border: 0; background: var(--blue); color: var(--white); font-weight: 600; cursor: pointer; }
+  .section { padding-top: 3.5rem; }
+  .section h2 { font-size: 1.7rem; margin: 0 0 1.4rem; color: var(--navy); }
+  .grid { display: grid; gap: 1.2rem; }
+  .cats { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .tools { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .posts { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card { background: var(--gray); border-radius: 14px; padding: 1.4rem; border: 1px solid transparent; transition: border-color 0.15s, transform 0.15s; }
+  a.card:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .card h3 { margin: 0.4rem 0; color: var(--navy); font-size: 1.1rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; color: var(--blue); background: #e3eefe; padding: 0.15rem 0.6rem; border-radius: 999px; }
+  .tag.soon { color: var(--muted); background: #e6e9f0; }
+  @media (max-width: 560px) { .search { flex-direction: column; } }
+</style>
