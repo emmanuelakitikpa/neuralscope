@@ -25,6 +25,7 @@ export const pages = [
   { key: 'privacy', en: 'privacy-policy', fr: 'politique-de-confidentialite' },
   { key: 'terms', en: 'terms', fr: 'conditions-utilisation' },
   { key: 'editorial', en: 'editorial-policy', fr: 'politique-editoriale' },
+  { key: 'advertise', en: 'advertise', fr: 'sponsorise' },
 ] as const;
 
 // Table de correspondance catégorie <-> URL (EN/FR)
@@ -94,6 +95,7 @@ export const ui = {
       privacy: { title: 'Privacy Policy', text: 'How NeuralScope collects, uses and protects your information.' },
       terms: { title: 'Terms of Use', text: 'The rules for using the NeuralScope website.' },
       editorial: { title: 'Editorial Policy', text: 'How we research, test and review AI tools, and how we stay independent.' },
+      advertise: { title: 'Advertise on NeuralScope', text: 'Reach a highly qualified audience of freelancers, entrepreneurs, and professionals actively looking for AI tools. We offer sponsored articles, newsletter placements, and display advertising. Contact us to receive our media kit.' },
     },
   },
   fr: {
@@ -153,6 +155,7 @@ export const ui = {
       privacy: { title: 'Politique de confidentialité', text: 'Comment NeuralScope collecte, utilise et protège vos informations.' },
       terms: { title: "Conditions d'utilisation", text: "Les règles d'utilisation du site NeuralScope." },
       editorial: { title: 'Politique éditoriale', text: "Comment nous recherchons, testons et évaluons les outils d'IA, et comment nous restons indépendants." },
+      advertise: { title: 'Sponsoriser NeuralScope', text: 'Touchez une audience hautement qualifiée d'indépendants, d'entrepreneurs et de professionnels à la recherche d'outils IA. Nous proposons des articles sponsorisés, des placements dans la newsletter et de la publicité display. Contactez-nous pour recevoir notre media kit.' },
     },
   },
 } as const;
