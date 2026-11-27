@@ -1,0 +1,11 @@
+/* TEAM */
+  Site: NeuralScope
+  Contact: contact@neuralscope.com
+  Author: NeuralScope Editorial Team
+
+/* SITE */
+  Last update: 2026-11-27
+  Language: English, Français
+  Doctype: HTML5
+  IDE: Visual Studio Code
+  Technologies: Astro, TypeScript, CSS

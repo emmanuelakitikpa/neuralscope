@@ -1,0 +1,8 @@
+# NeuralScope - ads.txt
+# Placeholder AdSense. Remplacez pub-XXXXXXXXXXXXXXXX par votre ID éditeur
+# une fois votre compte Google AdSense validé.
+#
+# Format officiel : <domain>, <publisher-id>, <relationship>, <certification-authority-id>
+#
+# Exemple une fois validé :
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

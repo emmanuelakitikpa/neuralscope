@@ -1,0 +1,40 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  partner?: string;
+  sponsored?: boolean;
+  class?: string;
+}
+
+const { href, label, partner, sponsored = true, class: className } = Astro.props;
+const rel = sponsored ? 'sponsored noopener noreferrer' : 'noopener noreferrer';
+const displayPartner = partner ? ` (${partner})` : '';
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel={rel}
+  class:list={['affiliate-link', className]}
+  data-affiliate={sponsored ? 'true' : 'false'}
+>
+  {label}{displayPartner}
+</a>
+
+<style>
+  .affiliate-link {
+    color: #2876e8;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+  }
+  .affiliate-link:hover {
+    text-decoration-style: solid;
+  }
+  .affiliate-link::after {
+    content: ' ↗';
+    font-size: 0.85em;
+    opacity: 0.7;
+  }
+</style>
