@@ -48,12 +48,16 @@ Voici un aperçu rapide de notre classement. Pour les détails, lisez nos analys
 
 ## 1. ChatGPT : Le couteau suisse de l'IA
 
+![Interface de ChatGPT](https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg)
+
 Développé par OpenAI, [ChatGPT](https://chatgpt.com) reste la référence absolue en matière d'assistant conversationnel. Il est capable de répondre à des questions complexes, de rédiger des e-mails, de traduire des textes ou encore de coder.
 
 **Ce que l'on aime :** Sa polyvalence inégalée et la qualité de ses réponses en français. La version gratuite est déjà très performante, mais la version Plus (20$/mois) donne accès aux modèles les plus récents.
 **Ce qu'il faut améliorer :** L'interface peut parfois être lente aux heures de pointe.
 
 ## 2. Claude : L'as de la rédaction
+
+![Interface de Claude](https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Anthropic_logo.svg/512px-Anthropic_logo.svg.png)
 
 Développé par Anthropic, [Claude](https://claude.ai) s'est imposé comme le meilleur assistant pour le travail sur de longs documents. Sa fenêtre de contexte lui permet d'analyser des fichiers entiers sans perdre le fil.
 
@@ -62,12 +66,16 @@ Développé par Anthropic, [Claude](https://claude.ai) s'est imposé comme le me
 
 ## 3. Gemini : L'atout de Google
 
+![Interface de Gemini](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/512px-Google_Gemini_logo.svg.png)
+
 [Gemini](https://gemini.google.com) a pour lui d'être directement connecté à l'écosystème Google (Gmail, Docs, Drive). Il est capable de résumer vos e-mails ou de trouver des informations dans vos fichiers.
 
 **Ce que l'on aime :** L'intégration parfaite avec la suite Google Workspace.
 **Ce qu'il faut améliorer :** La version gratuite est parfois moins précise sur les tâches complexes.
 
 ## 4. Midjourney : La référence pour les images
+
+![Interface de Midjourney](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.svg/512px-Midjourney_Emblem.svg.png)
 
 [Midjourney](https://midjourney.com) est le générateur d'images le plus populaire auprès des créatifs. Il est capable de produire des visuels d'une qualité artistique époustouflante à partir d'une simple description textuelle.
 
@@ -76,12 +84,16 @@ Développé par Anthropic, [Claude](https://claude.ai) s'est imposé comme le me
 
 ## 5. Jasper : L'outil des marketeurs
 
+![Interface de Jasper](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Jasper_AI_logo.svg/512px-Jasper_AI_logo.svg.png)
+
 [Jasper](https://jasper.ai) est un outil spécialisé dans la création de contenu marketing. Il connaît les techniques de copywriting et peut générer des articles de blog, des posts LinkedIn ou des publicités.
 
 **Ce que l'on aime :** La connaissance de la "voix de la marque" et les modèles prêts à l'emploi.
 **Ce qu'il faut améliorer :** Le prix de départ est un peu élevé pour les particuliers (39$/mois).
 
 ## 6. Copy.ai : Le meilleur pour les équipes commerciales
+
+![Interface de Copy.ai](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Copy.ai_logo.svg/512px-Copy.ai_logo.svg.png)
 
 [Copy.ai](https://copy.ai) s'est spécialisé dans les workflows des équipes de vente et de marketing. Il peut automatiser la rédaction de cold emails, de fiches produits ou de réponses clients.
 
@@ -90,12 +102,16 @@ Développé par Anthropic, [Claude](https://claude.ai) s'est imposé comme le me
 
 ## 7. Synthesia : Créez des vidéos sans caméra
 
+![Interface de Synthesia](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Synthesia_logo.svg/512px-Synthesia_logo.svg.png)
+
 [Synthesia](https://synthesia.io) permet de créer des vidéos de formation ou de présentation en utilisant des avatars d'IA. Vous tapez un texte, et l'avatar le prononce dans plus de 120 langues.
 
 **Ce que l'on aime :** La qualité de la synchronisation labiale et la variété des avatars.
 **Ce qu'il faut améliorer :** Les expressions faciales restent encore un peu raides par rapport à une vraie caméra.
 
 ## 8. ElevenLabs : La voix de l'IA
+
+![Interface de ElevenLabs](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/ElevenLabs_logo.svg/512px-ElevenLabs_logo.svg.png)
 
 [ElevenLabs](https://elevenlabs.io) est le meilleur outil de synthèse vocale du marché. Vous pouvez cloner votre voix, créer des voix off pour des vidéos YouTube ou des livres audio avec un naturel déconcertant.
 
@@ -104,12 +120,16 @@ Développé par Anthropic, [Claude](https://claude.ai) s'est imposé comme le me
 
 ## 9. Zapier : Connectez tout
 
+![Interface de Zapier](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zapier_logo.svg/512px-Zapier_logo.svg.png)
+
 [Zapier](https://zapier.com) n'est pas une IA en soi, mais un outil d'automatisation. Il permet de connecter plus de 5 000 applications entre elles. Couplé à l'IA, il peut par exemple vous envoyer un résumé de vos e-mails sur Slack chaque matin.
 
 **Ce que l'on aime :** La simplicité de création des "Zaps" (automatisations).
 **Ce qu'il faut améliorer :** Le prix peut vite monter si vous avez besoin de beaucoup d'automatisations.
 
 ## 10. Make : L'automatisation visuelle
+
+![Interface de Make](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Make_logo.svg/512px-Make_logo.svg.png)
 
 [Make](https://make.com) (anciennement Integromat) est l'alternative à Zapier. Il propose une interface visuelle sous forme de diagrammes pour créer des scénarios d'automatisation complexes.
 
