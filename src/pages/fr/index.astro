@@ -1,36 +1,5 @@
 ---
-const siteName = "NeuralScope";
-const tagline = "Comprendre l'IA. Mieux choisir. Travailler plus intelligemment.";
+import Home from '../../components/Home.astro';
 ---
 
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{siteName} | Outils et logiciels IA</title>
-    <meta name="description" content="Tests, comparatifs et guides indépendants pour choisir les bons outils d'intelligence artificielle." />
-  </head>
-  <body>
-    <main>
-      <h1>{siteName}</h1>
-      <p>{tagline}</p>
-    </main>
-  </body>
-</html>
-
-<style>
-  body {
-    margin: 0;
-    font-family: Inter, Arial, sans-serif;
-    background: #101B33;
-    color: #FFFFFF;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  h1 { font-size: 3rem; margin: 0 0 0.5rem; }
-  p { color: #3988F5; font-size: 1.2rem; margin: 0; }
-</style>
+<Home lang="fr" />

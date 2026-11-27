@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { pages, ui } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return pages.map((p) => ({ params: { slug: p.fr }, props: { pageKey: p.key } }));
+}
+
+const { pageKey } = Astro.props;
+const text = ui.fr.pagesText[pageKey];
+---
+
+<BaseLayout lang="fr" title={text.title} description={text.text} pageKey={pageKey}>
+  <section class="container page">
+    <h1>{text.title}</h1>
+    <p class="lead">{text.text}</p>
+    <p class="muted">{ui.fr.soon}</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .page { padding: 4rem 0 2rem; max-width: 760px; }
+  .page h1 { color: var(--navy); font-size: 2.2rem; margin: 0 0 1rem; }
+  .lead { font-size: 1.15rem; }
+</style>
