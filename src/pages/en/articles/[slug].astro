@@ -47,6 +47,36 @@ const frUrl = translation
   {frUrl && <link rel="alternate" hreflang="fr" href={frUrl} />}
   <link rel="alternate" hreflang="x-default" href={canonical} />
   <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.data.title,
+    "description": post.data.description,
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": post.data.author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "NeuralScope",
+      "logo": {
+        "@type": "ImageObject",
+        "url": new URL(`${base}/favicon.svg`, Astro.site).toString()
+      }
+    },
+    "datePublished": post.data.pubDate.toISOString(),
+    "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+    "mainEntityOfPage": canonical.toString(),
+    "keywords": post.data.tags.join(', '),
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "NeuralScope",
+      "url": Astro.site?.toString()
+    },
+    ...(post.data.cover ? { "image": new URL(post.data.cover, Astro.site).toString() } : {}),
+    ...(frUrl ? { "sameAs": frUrl.toString() } : {})
+  })} />
 </head>
 <body>
   <header class="site-header">
