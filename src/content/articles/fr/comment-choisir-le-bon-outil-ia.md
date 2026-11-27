@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Comment choisir le bon outil d'intelligence artificielle"
 description: "Une méthode pratique pour évaluer les outils IA selon vos besoins, votre budget, la confidentialité et votre façon de travailler."
 lang: "fr"
@@ -12,8 +12,6 @@ tags: ["outils IA", "productivité", "débutants"]
 draft: false
 featured: true
 ---
-
-# Comment choisir le bon outil d'intelligence artificielle
 
 Choisir un outil d'intelligence artificielle doit commencer par un problème précis à résoudre, et non par une marque populaire ou une fonctionnalité à la mode.
 
