@@ -42,6 +42,43 @@ const year = new Date().getFullYear();
     <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <link rel="alternate" type="application/rss+xml" title="NeuralScope EN" href={`${base}/en/rss.xml`} />
     <link rel="alternate" type="application/rss+xml" title="NeuralScope FR" href={`${base}/fr/rss.xml`} />
+  
+  <!-- Google Analytics 4 (Chargé uniquement avec consentement RGPD) -->
+  <script is:inline>
+    (function() {
+      const GA_ID = 'G-VBF9FZ07D7';
+      let gaLoaded = false;
+
+      function loadGA() {
+        if (gaLoaded) return;
+        gaLoaded = true;
+
+        // 1. Charger le script Google
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(script);
+
+        // 2. Initialiser GA4 avec anonymisation IP (RGPD)
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){window.dataLayer.push(arguments);}
+        window.gtag('js', new Date());
+        window.gtag('config', GA_ID, { 'anonymize_ip': true });
+      }
+
+      // Vérifier le consentement au chargement de la page
+      if (localStorage.getItem('neuralscope_consent') === 'accepted') {
+        loadGA();
+      }
+
+      // Écouter si l'utilisateur clique sur "Accepter" pendant la visite
+      window.addEventListener('cookie-consent', function(e) {
+        if (e.detail && e.detail.consent === 'accepted') {
+          loadGA();
+        }
+      });
+    })();
+  </script>
   </head>
   <body>
     <header class="site-header">
