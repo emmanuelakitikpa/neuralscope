@@ -1,0 +1,75 @@
+﻿---
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles', ({ data }) =>
+  data.lang === 'en' && !data.draft
+)).sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(`${base}en/articles/`, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>AI Guides & Articles | NeuralScope</title>
+  <meta name="description" content="Explore practical AI guides, reviews, comparisons and tutorials to help you choose better tools." />
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content="index,follow" />
+  <link rel="alternate" hreflang="en" href={canonical} />
+  <link rel="alternate" hreflang="fr" href={new URL(`${base}fr/articles/`, Astro.site)} />
+  <link rel="alternate" hreflang="x-default" href={canonical} />
+</head>
+<body>
+  <header>
+    <a class="brand" href={`${base}en/`}>NeuralScope</a>
+    <nav>
+      <a href={`${base}en/`}>Home</a>
+      <a href={`${base}en/articles/`}>Articles</a>
+      <a href={`${base}fr/articles/`}>Français</a>
+    </nav>
+  </header>
+  <main>
+    <p class="eyebrow">LEARN ABOUT AI</p>
+    <h1>AI Guides & Articles</h1>
+    <p class="intro">Practical guides, independent analysis and useful insights to help you understand AI and choose better tools.</p>
+
+    {articles.length > 0 ? (
+      <section class="articles">
+        {articles.map((article) => (
+          <article class="card">
+            <p class="meta">{article.data.type.replace('-', ' ')} · {article.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}</p>
+            <h2><a href={`${base}en/articles/${article.data.slug}/`}>{article.data.title}</a></h2>
+            <p>{article.data.description}</p>
+            <a class="read" href={`${base}en/articles/${article.data.slug}/`}>Read article →</a>
+          </article>
+        ))}
+      </section>
+    ) : (
+      <p>No articles published yet. Check back soon.</p>
+    )}
+  </main>
+  <footer>© {new Date().getFullYear()} NeuralScope. Understand AI. Choose Better. Work Smarter.</footer>
+</body>
+</html>
+<style>
+  :global(*){box-sizing:border-box}
+  :global(body){margin:0;background:#f3f5f9;color:#101b33;font-family:Arial,sans-serif}
+  header{height:76px;padding:0 max(6%,calc((100% - 1100px)/2));background:#101b33;display:flex;align-items:center;justify-content:space-between}
+  a{color:inherit;text-decoration:none}
+  .brand{font-size:23px;font-weight:800;color:white}
+  nav{display:flex;gap:25px;color:#fff;font-size:14px}
+  main{max-width:1000px;margin:75px auto;padding:0 24px;min-height:65vh}
+  .eyebrow{color:#3988f5;font-weight:bold;letter-spacing:2px;font-size:12px}
+  h1{font-size:clamp(34px,5vw,52px);margin:15px 0}
+  .intro{font-size:18px;line-height:1.7;color:#596579;max-width:700px}
+  .articles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:45px}
+  .card{background:white;border:1px solid #e4e9f1;border-radius:14px;padding:26px}
+  .meta{font-size:12px;text-transform:uppercase;color:#3988f5;font-weight:bold}
+  h2{font-size:22px;line-height:1.35}
+  .card p:not(.meta){color:#596579;line-height:1.7}
+  .read{display:inline-block;margin-top:12px;color:#2876e8;font-weight:bold}
+  footer{text-align:center;padding:30px;background:#101b33;color:#cbd4e4;font-size:13px}
+  @media(max-width:600px){header{padding:0 20px}nav{gap:12px;font-size:12px}main{margin:45px auto}}
+</style>

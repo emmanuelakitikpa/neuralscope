@@ -1,0 +1,152 @@
+---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const all = await getCollection('articles', ({ data }) => !data.draft);
+  const enArticles = all.filter((a) => a.data.lang === 'en');
+  const frArticles = all.filter((a) => a.data.lang === 'fr');
+
+  return enArticles.map((post) => ({
+    params: { slug: post.data.slug },
+    props: {
+      post,
+      translation:
+        frArticles.find((f) => f.data.translationKey === post.data.translationKey) ?? null,
+    },
+  }));
+}
+
+const { post, translation } = Astro.props;
+const { Content } = await render(post);
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(`${base}en/articles/${post.data.slug}/`, Astro.site);
+const frUrl = translation
+  ? new URL(`${base}fr/articles/${translation.data.slug}/`, Astro.site)
+  : null;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>{post.data.title} | NeuralScope</title>
+  <meta name="description" content={post.data.description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="NeuralScope" />
+  <meta property="og:title" content={post.data.title} />
+  <meta property="og:description" content={post.data.description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content="en_US" />
+  <meta property="article:published_time" content={post.data.pubDate.toISOString()} />
+  {post.data.updatedDate && <meta property="article:modified_time" content={post.data.updatedDate.toISOString()} />}
+  <meta name="twitter:card" content="summary" />
+  <link rel="alternate" hreflang="en" href={canonical} />
+  {frUrl && <link rel="alternate" hreflang="fr" href={frUrl} />}
+  <link rel="alternate" hreflang="x-default" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" translate="no" href={`${base}en/`}>Neural<span>Scope</span></a>
+      <nav>
+        <a href={`${base}en/articles/`}>All articles</a>
+        <a href={`${base}fr/articles/${post.data.slug}/`} hreflang="fr" lang="fr">Français</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <a class="back" href={`${base}en/articles/`}>← All articles</a>
+    <p class="meta">
+      {post.data.category.replace('-', ' ')} · {post.data.type} ·
+      <time datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'long' })}
+      </time>
+    </p>
+    <h1>{post.data.title}</h1>
+    <p class="description">{post.data.description}</p>
+    <p class="author">By {post.data.author}</p>
+    {frUrl && (
+      <p class="translation">
+        Read this article in <a href={frUrl} hreflang="fr" lang="fr">Français</a>
+      </p>
+    )}
+    <article class="content"><Content /></article>
+    {post.data.tags.length > 0 && (
+      <p class="tags">Topics: {post.data.tags.join(' · ')}</p>
+    )}
+  </main>
+  <footer class="site-footer">
+    <div class="container">© {new Date().getFullYear()} NeuralScope. Understand AI. Choose Better. Work Smarter.</div>
+  </footer>
+</body>
+</html>
+
+<style>
+  :root {
+    --navy: #101b33;
+    --blue: #3988f5;
+    --white: #ffffff;
+    --gray: #f3f5f9;
+    --text: #1d2740;
+    --muted: #5d6b86;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    background: var(--gray);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: #2876e8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+  .site-header { background: var(--navy); color: var(--white); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; max-width: 1100px; }
+  .brand { color: var(--white); font-size: 23px; font-weight: 800; }
+  .brand span { color: var(--blue); }
+  .site-header nav { display: flex; gap: 22px; font-size: 14px; }
+  .site-header nav a { color: var(--white); }
+  main { padding: 2.5rem 24px 4rem; }
+  .back { font-size: 14px; }
+  .meta {
+    margin-top: 1.8rem;
+    color: var(--blue);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.15; margin: .6rem 0; color: var(--navy); }
+  .description { font-size: 1.2rem; color: var(--muted); }
+  .author { font-size: .9rem; color: var(--muted); }
+  .translation {
+    padding: .8rem 1rem;
+    background: #e6efff;
+    border-radius: 8px;
+    font-size: .95rem;
+  }
+  .content {
+    margin-top: 2.5rem;
+    background: var(--white);
+    padding: clamp(22px, 5vw, 48px);
+    border-radius: 14px;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+  .content :global(h1) { display: none; }
+  .content :global(h2) { margin-top: 2rem; font-size: 1.6rem; color: var(--navy); }
+  .content :global(h3) { margin-top: 1.6rem; font-size: 1.25rem; }
+  .content :global(p), .content :global(li) { color: #344158; }
+  .content :global(ul), .content :global(ol) { padding-left: 1.5rem; }
+  .tags { margin-top: 1.6rem; color: var(--muted); font-size: .85rem; }
+  .site-footer { background: var(--navy); color: #cbd4e4; padding: 1.8rem 0; font-size: 13px; text-align: center; }
+  @media (max-width: 600px) {
+    .site-header nav { gap: 12px; }
+    main { padding-top: 1.5rem; }
+  }
+</style>
