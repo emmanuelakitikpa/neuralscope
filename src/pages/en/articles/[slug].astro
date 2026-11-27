@@ -18,10 +18,10 @@ export async function getStaticPaths() {
 
 const { post, translation } = Astro.props;
 const { Content } = await render(post);
-const base = import.meta.env.BASE_URL;
-const canonical = new URL(`${base}en/articles/${post.data.slug}/`, Astro.site);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonical = new URL(`${base}/en/articles/${post.data.slug}/`, Astro.site);
 const frUrl = translation
-  ? new URL(`${base}fr/articles/${translation.data.slug}/`, Astro.site)
+  ? new URL(`${base}/fr/articles/${translation.data.slug}/`, Astro.site)
   : null;
 ---
 
@@ -46,20 +46,20 @@ const frUrl = translation
   <link rel="alternate" hreflang="en" href={canonical} />
   {frUrl && <link rel="alternate" hreflang="fr" href={frUrl} />}
   <link rel="alternate" hreflang="x-default" href={canonical} />
-  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+  <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" translate="no" href={`${base}en/`}>Neural<span>Scope</span></a>
+      <a class="brand" translate="no" href={`${base}/en/`}>Neural<span>Scope</span></a>
       <nav>
-        <a href={`${base}en/articles/`}>All articles</a>
-        <a href={`${base}fr/articles/${post.data.slug}/`} hreflang="fr" lang="fr">Français</a>
+        <a href={`${base}/en/articles/`}>All articles</a>
+        <a href={`${base}/fr/articles/${post.data.slug}/`} hreflang="fr" lang="fr">Français</a>
       </nav>
     </div>
   </header>
   <main class="container">
-    <a class="back" href={`${base}en/articles/`}>← All articles</a>
+    <a class="back" href={`${base}/en/articles/`}>← All articles</a>
     <p class="meta">
       {post.data.category.replace('-', ' ')} · {post.data.type} ·
       <time datetime={post.data.pubDate.toISOString()}>
