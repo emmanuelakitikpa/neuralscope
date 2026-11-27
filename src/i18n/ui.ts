@@ -155,7 +155,7 @@ export const ui = {
       privacy: { title: 'Politique de confidentialité', text: 'Comment NeuralScope collecte, utilise et protège vos informations.' },
       terms: { title: "Conditions d'utilisation", text: "Les règles d'utilisation du site NeuralScope." },
       editorial: { title: 'Politique éditoriale', text: "Comment nous recherchons, testons et évaluons les outils d'IA, et comment nous restons indépendants." },
-      advertise: { title: 'Sponsoriser NeuralScope', text: 'Touchez une audience hautement qualifiée d'indépendants, d'entrepreneurs et de professionnels à la recherche d'outils IA. Nous proposons des articles sponsorisés, des placements dans la newsletter et de la publicité display. Contactez-nous pour recevoir notre media kit.' },
+      advertise: { title: 'Sponsoriser NeuralScope', text: "Touchez une audience hautement qualifiée d'indépendants, d'entrepreneurs et de professionnels à la recherche d'outils IA. Nous proposons des articles sponsorisés, des placements dans la newsletter et de la publicité display. Contactez-nous pour recevoir notre media kit." },
     },
   },
 } as const;
