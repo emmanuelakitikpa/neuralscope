@@ -4,7 +4,7 @@ description: "Une méthode pratique pour évaluer les outils IA selon vos besoin
 lang: "fr"
 slug: "comment-choisir-le-bon-outil-ia"
 translationKey: "choose-right-ai-tool"
-category: "productivity"
+category: "ai-guides-news"
 type: "guide"
 pubDate: 2026-11-27
 author: "Équipe éditoriale NeuralScope"

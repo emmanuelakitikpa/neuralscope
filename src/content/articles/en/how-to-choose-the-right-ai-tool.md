@@ -4,7 +4,7 @@ description: "A practical framework for evaluating AI tools based on your needs,
 lang: "en"
 slug: "how-to-choose-the-right-ai-tool"
 translationKey: "choose-right-ai-tool"
-category: "productivity"
+category: "ai-guides-news"
 type: "guide"
 pubDate: 2026-11-27
 author: "NeuralScope Editorial Team"

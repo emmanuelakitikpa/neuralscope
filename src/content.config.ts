@@ -1,4 +1,4 @@
-﻿import { defineCollection } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -14,11 +14,11 @@ const articles = defineCollection({
     slug: z.string(),
     translationKey: z.string(),
     category: z.enum([
-      'chatbots',
-      'image-video',
-      'writing-content',
-      'business-automation',
-      'productivity',
+      'ai-tools',
+      'ai-automation',
+      'ai-content-creation',
+      'ai-for-business',
+      'ai-guides-news',
     ]),
     type: z.enum(['review', 'comparison', 'tutorial', 'guide']),
     pubDate: z.coerce.date(),

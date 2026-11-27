@@ -119,3 +119,39 @@ export const ui = {
     },
   },
 } as const;
+// ============================================================
+// Table de correspondance Catégorie <-> URL (EN/FR)
+// Utilisée pour la navigation, le sitemap et les pages catégories
+// ============================================================
+export const categorySlugs: Record<string, { en: string; fr: string; labelEn: string; labelFr: string }> = {
+  'ai-tools': {
+    en: 'ai-tools',
+    fr: 'outils-ia',
+    labelEn: 'AI Tools',
+    labelFr: 'Outils IA',
+  },
+  'ai-automation': {
+    en: 'ai-automation',
+    fr: 'automatisation-ia',
+    labelEn: 'AI Automation',
+    labelFr: 'Automatisation IA',
+  },
+  'ai-content-creation': {
+    en: 'ai-content-creation',
+    fr: 'creation-contenu-ia',
+    labelEn: 'AI Content Creation',
+    labelFr: 'Création de contenu IA',
+  },
+  'ai-for-business': {
+    en: 'ai-for-business',
+    fr: 'ia-pour-entreprises',
+    labelEn: 'AI for Business',
+    labelFr: 'IA pour les entreprises',
+  },
+  'ai-guides-news': {
+    en: 'ai-guides-news',
+    fr: 'guides-actualites-ia',
+    labelEn: 'AI Guides & News',
+    labelFr: 'Guides & Actualités IA',
+  },
+};
