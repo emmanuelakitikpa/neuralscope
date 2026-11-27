@@ -45,7 +45,7 @@ const year = new Date().getFullYear();
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="logo" href={pageUrl(lang)}>Neural<span>Scope</span></a>
+        <a class="logo" translate="no" href={pageUrl(lang)}>Neural<span>Scope</span></a>
         <nav class="nav" aria-label="Main">
           {navKeys.map((k) => <a href={pageUrl(lang, k)}>{t.nav[k]}</a>)}
         </nav>
@@ -64,7 +64,7 @@ const year = new Date().getFullYear();
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <a class="logo" href={pageUrl(lang)}>Neural<span>Scope</span></a>
+          <a class="logo" translate="no" href={pageUrl(lang)}>Neural<span>Scope</span></a>
           <p class="muted">{t.footer.about}</p>
         </div>
         <div>
