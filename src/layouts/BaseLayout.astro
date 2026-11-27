@@ -1,5 +1,5 @@
 ---
-import { ui, type Lang } from '../i18n/ui';
+import { ui, navKeys, legalKeys, type Lang } from '../i18n/ui';
 import { pageUrl, pageAbs } from '../i18n/utils';
 
 interface Props {
@@ -16,8 +16,6 @@ const fullTitle = title ? `${title} | ${t.siteName}` : `${t.siteName} | ${t.tagl
 const desc = description ?? t.metaDescription;
 const canonical = pageAbs(lang, pageKey);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const navKeys = ['tools', 'reviews', 'comparisons', 'tutorials'] as const;
-const legalKeys = ['privacy', 'terms', 'editorial', 'about', 'contact'] as const;
 const legalLabels = ui[lang].pagesText;
 const year = new Date().getFullYear();
 ---

@@ -1,11 +1,25 @@
 export const languages = ['en', 'fr'] as const;
 export type Lang = (typeof languages)[number];
 
+// Les 5 catégories éditoriales officielles (navigation principale)
+export const navKeys = [
+  'ai-tools',
+  'ai-automation',
+  'ai-content-creation',
+  'ai-for-business',
+  'ai-guides-news',
+] as const;
+
+// Les pages légales et informatives (navigation secondaire / footer)
+export const legalKeys = ['privacy', 'terms', 'editorial', 'about', 'contact'] as const;
+
+// Tableau unifié de toutes les pages générées par [...slug].astro
 export const pages = [
-  { key: 'tools', en: 'ai-tools', fr: 'outils-ia' },
-  { key: 'reviews', en: 'reviews', fr: 'tests' },
-  { key: 'comparisons', en: 'comparisons', fr: 'comparatifs' },
-  { key: 'tutorials', en: 'tutorials', fr: 'tutoriels' },
+  { key: 'ai-tools', en: 'ai-tools', fr: 'outils-ia' },
+  { key: 'ai-automation', en: 'ai-automation', fr: 'automatisation-ia' },
+  { key: 'ai-content-creation', en: 'ai-content-creation', fr: 'creation-contenu-ia' },
+  { key: 'ai-for-business', en: 'ai-for-business', fr: 'ia-pour-entreprises' },
+  { key: 'ai-guides-news', en: 'ai-guides-news', fr: 'guides-actualites-ia' },
   { key: 'about', en: 'about', fr: 'a-propos' },
   { key: 'contact', en: 'contact', fr: 'contact' },
   { key: 'privacy', en: 'privacy-policy', fr: 'politique-de-confidentialite' },
@@ -13,12 +27,27 @@ export const pages = [
   { key: 'editorial', en: 'editorial-policy', fr: 'politique-editoriale' },
 ] as const;
 
+// Table de correspondance catégorie <-> URL (EN/FR)
+export const categorySlugs: Record<string, { en: string; fr: string; labelEn: string; labelFr: string }> = {
+  'ai-tools': { en: 'ai-tools', fr: 'outils-ia', labelEn: 'AI Tools', labelFr: 'Outils IA' },
+  'ai-automation': { en: 'ai-automation', fr: 'automatisation-ia', labelEn: 'AI Automation', labelFr: 'Automatisation IA' },
+  'ai-content-creation': { en: 'ai-content-creation', fr: 'creation-contenu-ia', labelEn: 'AI Content Creation', labelFr: 'Création de contenu IA' },
+  'ai-for-business': { en: 'ai-for-business', fr: 'ia-pour-entreprises', labelEn: 'AI for Business', labelFr: 'IA pour les entreprises' },
+  'ai-guides-news': { en: 'ai-guides-news', fr: 'guides-actualites-ia', labelEn: 'AI Guides & News', labelFr: 'Guides & Actualités IA' },
+};
+
 export const ui = {
   en: {
     siteName: 'NeuralScope',
     tagline: 'Understand AI. Choose Better. Work Smarter.',
     metaDescription: 'Independent reviews, comparisons and guides to help you choose the right AI tools.',
-    nav: { tools: 'AI Tools', reviews: 'Reviews', comparisons: 'Comparisons', tutorials: 'Tutorials' },
+    nav: {
+      'ai-tools': 'AI Tools',
+      'ai-automation': 'Automation',
+      'ai-content-creation': 'Content Creation',
+      'ai-for-business': 'For Business',
+      'ai-guides-news': 'Guides & News',
+    },
     hero: {
       title: 'Find the right AI tool, faster.',
       text: 'Independent reviews, side-by-side comparisons and practical tutorials for the AI tools that matter.',
@@ -55,10 +84,11 @@ export const ui = {
       rights: 'All rights reserved.',
     },
     pagesText: {
-      tools: { title: 'AI Tools', text: 'Browse AI tools by category: chatbots, image and video, writing, automation and productivity.' },
-      reviews: { title: 'Reviews', text: 'Hands-on reviews of AI tools, with clear pros, cons and pricing.' },
-      comparisons: { title: 'Comparisons', text: 'Side-by-side comparisons to help you pick the right AI tool.' },
-      tutorials: { title: 'Tutorials', text: 'Step-by-step guides to get real results with AI tools.' },
+      'ai-tools': { title: 'AI Tools', text: 'Discover, compare and choose the best AI tools for your needs. Reviews, comparisons and recommendations.' },
+      'ai-automation': { title: 'AI Automation', text: 'Automate your tasks and workflows with AI. Practical guides and tools to save time.' },
+      'ai-content-creation': { title: 'AI Content Creation', text: 'Create videos, images and content with AI. Generators, editors and creative workflows.' },
+      'ai-for-business': { title: 'AI for Business', text: 'AI applications for companies and entrepreneurs. Strategy, tools and case studies.' },
+      'ai-guides-news': { title: 'AI Guides & News', text: 'Tutorials, explanations and news about artificial intelligence.' },
       about: { title: 'About NeuralScope', text: 'NeuralScope is an independent guide to AI tools, built to help you choose with confidence.' },
       contact: { title: 'Contact', text: 'Questions, corrections or partnership ideas? Get in touch with the NeuralScope team.' },
       privacy: { title: 'Privacy Policy', text: 'How NeuralScope collects, uses and protects your information.' },
@@ -70,7 +100,13 @@ export const ui = {
     siteName: 'NeuralScope',
     tagline: "Comprendre l'IA. Mieux choisir. Travailler plus intelligemment.",
     metaDescription: "Tests, comparatifs et guides indépendants pour choisir les bons outils d'intelligence artificielle.",
-    nav: { tools: 'Outils IA', reviews: 'Tests', comparisons: 'Comparatifs', tutorials: 'Tutoriels' },
+    nav: {
+      'ai-tools': 'Outils IA',
+      'ai-automation': 'Automatisation',
+      'ai-content-creation': 'Création',
+      'ai-for-business': 'Entreprises',
+      'ai-guides-news': 'Guides & Actus',
+    },
     hero: {
       title: "Trouvez plus vite le bon outil d'IA.",
       text: "Tests indépendants, comparatifs côte à côte et tutoriels pratiques pour les outils d'IA qui comptent.",
@@ -107,10 +143,11 @@ export const ui = {
       rights: 'Tous droits réservés.',
     },
     pagesText: {
-      tools: { title: 'Outils IA', text: "Parcourez les outils d'IA par catégorie : chatbots, image et vidéo, rédaction, automatisation et productivité." },
-      reviews: { title: 'Tests', text: "Tests approfondis d'outils d'IA, avec avantages, limites et tarifs." },
-      comparisons: { title: 'Comparatifs', text: "Comparatifs côte à côte pour choisir le bon outil d'IA." },
-      tutorials: { title: 'Tutoriels', text: "Guides pas à pas pour obtenir de vrais résultats avec les outils d'IA." },
+      'ai-tools': { title: 'Outils IA', text: "Découvrez, comparez et choisissez les meilleurs outils d'IA pour vos besoins. Tests, comparatifs et recommandations." },
+      'ai-automation': { title: 'Automatisation IA', text: "Automatisez vos tâches et workflows avec l'IA. Guides pratiques et outils pour gagner du temps." },
+      'ai-content-creation': { title: 'Création de contenu IA', text: "Créez des vidéos, des images et du contenu avec l'IA. Générateurs, éditeurs et workflows créatifs." },
+      'ai-for-business': { title: 'IA pour les entreprises', text: "Applications de l'IA pour les entreprises et les entrepreneurs. Stratégie, outils et cas d'usage." },
+      'ai-guides-news': { title: 'Guides & Actualités IA', text: "Tutoriels, explications et actualités sur l'intelligence artificielle." },
       about: { title: 'À propos de NeuralScope', text: "NeuralScope est un guide indépendant des outils d'IA, conçu pour vous aider à choisir en confiance." },
       contact: { title: 'Contact', text: "Une question, une correction ou une idée de partenariat ? Contactez l'équipe NeuralScope." },
       privacy: { title: 'Politique de confidentialité', text: 'Comment NeuralScope collecte, utilise et protège vos informations.' },
@@ -119,39 +156,3 @@ export const ui = {
     },
   },
 } as const;
-// ============================================================
-// Table de correspondance Catégorie <-> URL (EN/FR)
-// Utilisée pour la navigation, le sitemap et les pages catégories
-// ============================================================
-export const categorySlugs: Record<string, { en: string; fr: string; labelEn: string; labelFr: string }> = {
-  'ai-tools': {
-    en: 'ai-tools',
-    fr: 'outils-ia',
-    labelEn: 'AI Tools',
-    labelFr: 'Outils IA',
-  },
-  'ai-automation': {
-    en: 'ai-automation',
-    fr: 'automatisation-ia',
-    labelEn: 'AI Automation',
-    labelFr: 'Automatisation IA',
-  },
-  'ai-content-creation': {
-    en: 'ai-content-creation',
-    fr: 'creation-contenu-ia',
-    labelEn: 'AI Content Creation',
-    labelFr: 'Création de contenu IA',
-  },
-  'ai-for-business': {
-    en: 'ai-for-business',
-    fr: 'ia-pour-entreprises',
-    labelEn: 'AI for Business',
-    labelFr: 'IA pour les entreprises',
-  },
-  'ai-guides-news': {
-    en: 'ai-guides-news',
-    fr: 'guides-actualites-ia',
-    labelEn: 'AI Guides & News',
-    labelFr: 'Guides & Actualités IA',
-  },
-};
