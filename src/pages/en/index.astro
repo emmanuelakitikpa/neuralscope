@@ -1,5 +1,9 @@
 ---
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import Home from '../../components/Home.astro';
+import { ui } from '../../i18n/ui';
 ---
 
-<Home lang="en" />
+<BaseLayout lang="en" title={ui.en.hero.title} description={ui.en.hero.text}>
+  <Home lang="en" />
+</BaseLayout>

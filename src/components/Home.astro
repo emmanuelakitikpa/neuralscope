@@ -15,7 +15,7 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
 )).sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()).slice(0, 3);
 ---
 
-<section class="hero" style={`background-image: linear-gradient(to right, rgba(10, 15, 30, 0.95) 0%, rgba(10, 15, 30, 0.8) 50%, rgba(10, 15, 30, 0.3) 100%), url('${base}/images/hero-bg.png');`}>
+<section class="hero" style={`background-image: linear-gradient(to right, rgba(10, 15, 30, 0.95) 0%, rgba(10, 15, 30, 0.7) 50%, rgba(10, 15, 30, 0.2) 100%), url('${base}/images/hero-bg.png');`}>
   <div class="container">
     <div class="hero-content">
       <h1>{t.hero.title}</h1>
@@ -79,12 +79,12 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
 </section>
 
 <style>
-  /* Force la police moderne sur tout le composant */
-  section, h1, h2, h3, p, input, button {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Force une police moderne et propre */
+  .hero, .section, h1, h2, h3, p, input, button {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
   }
 
-  /* Le conteneur magique qui centre tout */
+  /* Conteneur centré */
   .container { 
     width: 100%;
     max-width: 1140px; 
@@ -99,14 +99,17 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
     background-position: center right;
     background-repeat: no-repeat;
     color: white;
+    display: flex;
+    align-items: center;
   }
-  .hero-content { max-width: 650px; }
+  .hero-content { max-width: 700px; }
   .hero h1 { 
-    font-size: clamp(2.5rem, 5vw, 4rem); 
+    font-size: clamp(2.5rem, 5vw, 4.2rem); 
     margin-bottom: 1.5rem; 
     line-height: 1.1; 
     font-weight: 800;
     letter-spacing: -0.03em;
+    color: #ffffff;
   }
   .hero p { 
     font-size: 1.25rem; 
