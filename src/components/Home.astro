@@ -15,19 +15,19 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
 )).sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()).slice(0, 3);
 ---
 
-<!-- SECTION HERO (Design MetaLeaf) -->
-<section class="hero" style={`background-image: linear-gradient(to right, rgba(16, 27, 51, 0.95) 0%, rgba(16, 27, 51, 0.85) 40%, rgba(16, 27, 51, 0.4) 100%), url('${base}/images/hero-bg.png');`}>
-  <div class="container hero-content">
-    <h1>{t.hero.title}</h1>
-    <p>{t.hero.text}</p>
-    <div class="search-box">
-      <input type="text" placeholder={t.hero.search} />
-      <button>{t.hero.button}</button>
+<section class="hero" style={`background-image: linear-gradient(to right, rgba(10, 15, 30, 0.95) 0%, rgba(10, 15, 30, 0.8) 50%, rgba(10, 15, 30, 0.3) 100%), url('${base}/images/hero-bg.png');`}>
+  <div class="container">
+    <div class="hero-content">
+      <h1>{t.hero.title}</h1>
+      <p>{t.hero.text}</p>
+      <div class="search-box">
+        <input type="text" placeholder={t.hero.search} />
+        <button>{t.hero.button}</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION CATEGORIES -->
 <section class="section bg-light">
   <div class="container">
     <h2>{t.categoriesTitle}</h2>
@@ -42,7 +42,6 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
   </div>
 </section>
 
-<!-- SECTION OUTILS POPULAIRES -->
 <section class="section">
   <div class="container">
     <h2>{t.popularTitle}</h2>
@@ -58,14 +57,13 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
   </div>
 </section>
 
-<!-- SECTION DERNIERS ARTICLES -->
 <section class="section bg-light">
   <div class="container">
     <h2>{t.latestTitle}</h2>
     <div class="grid">
       {latestArticles.map((article) => (
         <a href={`${base}/${lang}/articles/${article.data.slug}/`} class="card article-card">
-          <span class="tag">{article.data.category}</span>
+          <span class="tag">{article.data.tag || article.data.category}</span>
           <h3>{article.data.title}</h3>
           <p>{article.data.description}</p>
           <span class="read-more">
@@ -81,36 +79,47 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
 </section>
 
 <style>
-  /* Hero Section */
+  /* Force la police moderne sur tout le composant */
+  section, h1, h2, h3, p, input, button {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* Le conteneur magique qui centre tout */
+  .container { 
+    width: 100%;
+    max-width: 1140px; 
+    margin: 0 auto; 
+    padding: 0 24px; 
+  }
+
+  /* Hero */
   .hero {
-    padding: 10rem 0 8rem;
+    padding: 10rem 0;
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
     color: white;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   .hero-content { max-width: 650px; }
   .hero h1 { 
-    font-size: clamp(3rem, 6vw, 4.5rem); 
+    font-size: clamp(2.5rem, 5vw, 4rem); 
     margin-bottom: 1.5rem; 
     line-height: 1.1; 
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
   .hero p { 
     font-size: 1.25rem; 
-    color: #a9b6d1; 
-    margin-bottom: 3rem; 
+    color: #d1d9e6; 
+    margin-bottom: 2.5rem; 
     line-height: 1.6;
-    max-width: 90%;
   }
   
-  /* Search Box (Glassmorphism) */
-  .search-box { display: flex; gap: 10px; }
+  /* Search Box */
+  .search-box { display: flex; gap: 12px; max-width: 550px; }
   .search-box input { 
     flex: 1; 
-    padding: 1.2rem 1.5rem; 
+    padding: 1rem 1.5rem; 
     border: 1px solid rgba(255,255,255,0.2); 
     border-radius: 8px; 
     font-size: 1rem; 
@@ -122,44 +131,45 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
   .search-box input::placeholder { color: #a9b6d1; }
   .search-box input:focus { border-color: #3988f5; background: rgba(255,255,255,0.15); }
   .search-box button { 
-    padding: 0 2.5rem; 
+    padding: 0 2rem; 
     background: #3988f5; 
     color: white; 
     border: none; 
     border-radius: 8px; 
     font-weight: 600; 
     cursor: pointer; 
-    font-size: 1rem;
     transition: background 0.2s;
   }
   .search-box button:hover { background: #2876e8; }
 
-  /* Sections communes */
+  /* Sections */
   .section { padding: 6rem 0; }
   .bg-light { background: #f8f9fc; }
-  h2 { font-size: 2.2rem; color: #101b33; margin-bottom: 3rem; text-align: center; font-weight: 800; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+  h2 { font-size: 2rem; color: #101b33; margin-bottom: 3rem; text-align: center; font-weight: 800; letter-spacing: -0.02em; }
   
-  /* Cartes */
+  /* Grille et Cartes */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
   .card { 
     background: #ffffff; 
-    padding: 2.5rem 2rem; 
+    padding: 2.5rem; 
     border-radius: 16px; 
     border: 1px solid #e4e9f1; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
     transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
   }
   .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
   
-  .category-card h3 { color: #101b33; margin: 0 0 1rem; font-size: 1.4rem; font-weight: 700; }
+  .category-card h3 { color: #101b33; margin: 0 0 1rem; font-size: 1.3rem; }
   .category-card p { color: #5d6b86; font-size: 1rem; line-height: 1.6; margin: 0; }
   
-  .tool-card { text-align: center; }
+  .tool-card { text-align: center; align-items: center; }
   .tool-card h3 { color: #101b33; margin: 1rem 0 0.5rem; font-size: 1.3rem; }
   .tool-card p { color: #5d6b86; font-size: 0.95rem; margin: 0; }
   
-  .article-card { text-decoration: none; display: flex; flex-direction: column; }
-  .article-card h3 { color: #101b33; margin: 0 0 1rem; font-size: 1.4rem; line-height: 1.4; font-weight: 700; }
+  .article-card { text-decoration: none; }
+  .article-card h3 { color: #101b33; margin: 0 0 1rem; font-size: 1.4rem; line-height: 1.4; }
   .article-card p { color: #5d6b86; font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem; flex-grow: 1; }
   
   .tag { 
@@ -173,15 +183,13 @@ const latestArticles = (await getCollection('articles', ({ data }) =>
     margin-bottom: 1.2rem; 
     text-transform: uppercase; 
     letter-spacing: 0.5px; 
-    align-self: flex-start;
   }
-  .read-more { color: #3988f5; font-weight: 700; font-size: 0.95rem; }
+  .read-more { color: #3988f5; font-weight: 700; font-size: 0.95rem; margin-top: auto; }
   .empty { text-align: center; color: #5d6b86; font-style: italic; }
   
-  /* Responsive */
   @media (max-width: 768px) {
     .hero { padding: 6rem 0; background-position: center; }
-    .hero h1 { font-size: 2.5rem; }
+    .hero h1 { font-size: 2.2rem; }
     .search-box { flex-direction: column; }
     .search-box button { padding: 1rem; }
   }
